@@ -9,14 +9,6 @@ class ItemsGridStartedEvent extends ItemsGridEvent {
   List<Object> get props => [];
 }
 
-class ClickOnItemEvent extends ItemsGridEvent {
-  final itemid;
-
-  const ClickOnItemEvent({this.itemid});
-
-  @override
-  List<Object> get props => [itemid];
-}
 
 class ChangeSearchStringEvent extends ItemsGridEvent {
   final currSearchStr;
