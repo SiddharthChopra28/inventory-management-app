@@ -31,10 +31,7 @@ class Item {
 
 }
 
-// Timer class
-class ItemTimer {
-  final DateTime start;
-  DateTime? end;
+// Item Widget
+class ItemWidget {
 
-  ItemTimer(this.end, {required this.start});
 }

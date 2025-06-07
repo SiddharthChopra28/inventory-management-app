@@ -4,18 +4,26 @@ abstract class ItemsGridEvent extends Equatable {
   const ItemsGridEvent();
 }
 
-// Event to kick start the todo list event
 class ItemsGridStartedEvent extends ItemsGridEvent {
   @override
   List<Object> get props => [];
 }
 
 class ClickOnItemEvent extends ItemsGridEvent {
-  final todoObj;
+  final itemid;
 
-  const ClickOnItemEvent(this.todoObj);
+  const ClickOnItemEvent({this.itemid});
 
   @override
-  List<Object> get props => [todoObj];
+  List<Object> get props => [itemid];
 }
 
+class ChangeSearchStringEvent extends ItemsGridEvent {
+  final currSearchStr;
+
+  const ChangeSearchStringEvent({this.currSearchStr = ""});
+
+  @override
+  List<Object> get props => [currSearchStr];
+
+}

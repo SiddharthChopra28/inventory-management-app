@@ -10,12 +10,19 @@ class ItemsGridBloc extends Bloc<ItemsGridEvent, ItemsGridState> {
 
   ItemsGridBloc() : super(ItemsGridLoadingState()) {
     on<ItemsGridStartedEvent>(_onStart);
+    on<ChangeSearchStringEvent>(_onSearch);
     // on<ClickOnItemEvent>(_onClick);
   }
 
-  _onStart(ItemsGridStartedEvent event, Emitter<ItemsGridState> emit) {
-    /// fetch the data here
-    emit(const ItemsGridLoadedState(items: []));
+  Future<void> _onStart(ItemsGridStartedEvent event, Emitter<ItemsGridState> emit) async {
+    // fetch the data here
+    emit(const ItemsGridLoadedState(items: [], categories: []));
+  }
+
+  _onSearch(ChangeSearchStringEvent event, Emitter<ItemsGridState> emit){
+    emit(ItemsGridLoadingState());
+    // fetch the data again
+    emit(const ItemsGridLoadedState(items: [], categories: []));
   }
 
   // AddTodo event handler which emits TodoAdded state
