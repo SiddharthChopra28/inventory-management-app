@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 project(ims CXX)
 
+find_package(jwt-cpp CONFIG REQUIRED)
+
 include(CheckIncludeFileCXX)
 
 check_include_file_cxx(any HAS_ANY)
@@ -19,7 +21,12 @@ endif ()
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_executable(${PROJECT_NAME} main.cc)
+add_executable(${PROJECT_NAME} main.cc
+        filters/JwtAuthFilter.cpp
+        filters/JwtAuthFilter.h)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE jwt-cpp::jwt-cpp)
+target_link_libraries(${PROJECT_NAME} PRIVATE bcrypt)
 
 # ##############################################################################
 # If you include the drogon source code locally in your project, use this method

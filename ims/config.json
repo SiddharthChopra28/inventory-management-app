@@ -99,6 +99,22 @@
             "timeout": -1.0
         }
     ],*/
+    "filters": {
+        "JwtAuth": {
+            "class": "JwtAuthFilter"
+        }
+
+    },
+
+    "db_clients": [
+        {
+            "name": "users",
+            "rdbms": "sqlite3",
+            "filename": "data.db",
+            "is_fast": true
+        }
+    ],
+
     "app": {
         //number_of_threads: The number of IO threads, 1 by default, if the value is set to 0, the number of threads
         //is the number of CPU cores

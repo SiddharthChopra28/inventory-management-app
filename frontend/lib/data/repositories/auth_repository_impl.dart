@@ -16,7 +16,6 @@ class AuthRepositoryImpl implements AuthRepository {
       if (response.statusCode == 200) {
         var retjson = response.data;
         await _storage.write(key: 'accessToken', value: retjson['accessToken']);
-        await _storage.write(key: 'refreshToken', value: retjson['refreshToken']);
         return true;
       }
       else{
@@ -56,7 +55,6 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<void> logout() async {
     try {
         await _storage.delete(key: 'accessToken');
-        await _storage.delete(key: 'refreshToken');
 
     }
     catch (e) {
