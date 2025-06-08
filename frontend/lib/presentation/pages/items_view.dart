@@ -1,4 +1,4 @@
-part of 'main.dart';
+part of '../../main.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -13,9 +13,14 @@ class _MyHomePageState extends State<MyHomePage> {
   String? selectedFilter;
 
   @override
+  void initState() {
+    super.initState();
+    context.read<ItemsGridBloc>().add(ItemsGridStartedEvent());
+  }
+
+  @override
   Widget build(BuildContext context) {
 
-    context.read<ItemsGridBloc>().add(ItemsGridStartedEvent());
 
     return Scaffold(
       appBar: AppBar(

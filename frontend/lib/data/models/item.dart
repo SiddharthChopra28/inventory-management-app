@@ -3,7 +3,7 @@ import 'dart:ffi';
 /// Item class.
 /// Each `Item` has an `id`, `description` and `completed` boolean field.
 class Item {
-  final String id;
+  final int? id;
   final String name;
   final int quantity;
   final String category;
@@ -11,12 +11,12 @@ class Item {
   final String imageURL;
 
   Item({
-    required this.id,
+    this.id,
     required this.name,
     required this.quantity,
     required this.category,
     required this.price,
-    required this.imageURL
+    this.imageURL = ""
   });
 
   getDetails(){

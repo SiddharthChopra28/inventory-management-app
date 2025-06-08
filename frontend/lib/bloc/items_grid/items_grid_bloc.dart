@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../grid_item.dart';
+import '../../data/models/item.dart';
 
 part 'items_grid_event.dart';
 part 'items_grid_state.dart';

@@ -1,10 +1,17 @@
-import 'package:flutter/material.dart';
-import 'package:equatable/equatable.dart';
-import 'bloc/items_grid/items_grid_bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:io';
 
-part 'items_view.dart';
-part 'add_edit_items.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'bloc/items_grid/items_grid_bloc.dart';
+import 'bloc/items_add_edit/items_add_edit_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:dio/dio.dart';
+
+import 'data/models/item.dart';
+
+part 'presentation/pages/items_view.dart';
+part 'presentation/pages/add_edit_items.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,14 +22,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MultiBlocProvider(
+    return MultiBlocProvider(
       providers: [
         BlocProvider<ItemsGridBloc>(
           create: (context) => ItemsGridBloc(),
         ),
-        // BlocProvider<ItemsBloc>(
-        //   create: (context) => ItemsBloc(itemsRepository: ItemsRepository()),
-        // ),
+        BlocProvider<ItemsAddEditBloc>(
+          create: (context) => ItemsAddEditBloc(),
+        ),
         // BlocProvider<ItemFormBloc>(
         //   create: (context) => ItemFormBloc(itemsRepository: ItemsRepository()),
         // ),
