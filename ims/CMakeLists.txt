@@ -22,8 +22,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(${PROJECT_NAME} main.cc
-        filters/JwtAuthFilter.cpp
-        filters/JwtAuthFilter.h)
+        controllers/auth.cc
+        controllers/items.cc
+        filters/JwtAuthFilter.cpp)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE jwt-cpp::jwt-cpp)
 target_link_libraries(${PROJECT_NAME} PRIVATE bcrypt)

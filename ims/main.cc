@@ -1,10 +1,18 @@
 #include <drogon/drogon.h>
+#include "controllers/auth.h"
+#include "controllers/items.h"
+
+
 int main() {
-    drogon::app().addListener("0.0.0.0", 5556);
-    drogon::app().loadConfigFile("../config.json");
+    drogon::app()
+        .addListener("0.0.0.0", 5556)
+        .loadConfigFile("../config.json")
+        .setUploadPath("./uploads") // Directory where files will be saved
+        .setClientMaxBodySize(16 * 1024 * 1024) // 16 MB max body size
+        .setClientMaxMemoryBodySize(1 * 1024 * 1024) // 1 MB in-memory limit
+        .run();
 
 
-    drogon::app().run();
     drogon::app().getDbClient()->execSqlSync(
         R"sql(
             CREATE TABLE IF NOT EXISTS users (

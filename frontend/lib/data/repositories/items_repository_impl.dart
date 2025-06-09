@@ -12,7 +12,7 @@ class ItemsRepositoryImpl implements ItemsRepository {
   Future<List<Item>> getItemsBySearchStr({String searchstr = ""}) async {
     try{
       final response = await dio.get(
-        '$_baseUrl/items/get/search/',
+        '$_baseUrl/items/get/search',
         queryParameters: {'searchString': searchstr},
       );
       print('Response data: ${response.data}');
@@ -25,10 +25,25 @@ class ItemsRepositoryImpl implements ItemsRepository {
   }
 
   @override
+  Future<List<String>> getCategories() async {
+    try{
+      final response = await dio.get(
+        '$_baseUrl/items/get_categories',
+      );
+      print('Response data: ${response.data}');
+
+    }
+    catch(e){
+      print(e);
+    }
+
+  }
+
+  @override
   Future<Item> getItemsByID({int? id}) async{
     try{
       final response = await dio.get(
-        '$_baseUrl/items/get/id/',
+        '$_baseUrl/items/get/id',
         queryParameters: {'id': id},
       );
       print('Response data: ${response.data}');
@@ -46,7 +61,7 @@ class ItemsRepositoryImpl implements ItemsRepository {
   Future<void> addItem({Item ?item}) async{
     try{
       final response = await dio.post(
-          '$_baseUrl/items/add/',
+          '$_baseUrl/items/add',
           data: item?.getDetails()
       );
     }
@@ -59,7 +74,7 @@ class ItemsRepositoryImpl implements ItemsRepository {
   Future<void> updateItem({Item ?item}) async{
     try{
       final response = await dio.post(
-          '$_baseUrl/items/update/id',
+          '$_baseUrl/items/update',
           data: item?.getDetails()
       );
     }

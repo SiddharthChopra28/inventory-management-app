@@ -106,6 +106,12 @@
 
     },
 
+    "static": {
+        "root": "./uploads",
+        "allow_all": true,
+        "alias": "/images"
+    },
+
     "db_clients": [
         {
             "name": "users",
