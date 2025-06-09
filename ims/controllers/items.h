@@ -9,12 +9,13 @@
 class ItemsController : public drogon::HttpController<ItemsController> {
 public:
     METHOD_LIST_BEGIN
-    METHOD_ADD(ItemsController::getItemsBySearchStr, "/items/get/search", drogon::Get, "JwtAuthFilter");
-    METHOD_ADD(ItemsController::getItemsByID, "/items/get/id", drogon::Get, "JwtAuthFilter");
-    METHOD_ADD(ItemsController::getCategories, "/items/get_categories", drogon::Get, "JwtAuthFilter");
-    METHOD_ADD(ItemsController::addItem, "/items/add", drogon::Post, "JwtAuthFilter");
-    METHOD_ADD(ItemsController::updateItem, "/items/update", drogon::Post, "JwtAuthFilter");
-    METHOD_ADD(ItemsController::uploadImage, "/items/imageUpload", drogon::Post, "JwtAuthFilter");
+    ADD_METHOD_TO(ItemsController::getItemsBySearchStr, "/items/get/search", drogon::Get, "JwtAuthFilter");
+    ADD_METHOD_TO(ItemsController::getItemsByID, "/items/get/id", drogon::Get, "JwtAuthFilter");
+    ADD_METHOD_TO(ItemsController::getCategories, "/items/get_categories", drogon::Get, "JwtAuthFilter");
+    ADD_METHOD_TO(ItemsController::addItem, "/items/add", drogon::Post, "JwtAuthFilter");
+    ADD_METHOD_TO(ItemsController::updateItem, "/items/update", drogon::Post, "JwtAuthFilter");
+    ADD_METHOD_TO(ItemsController::uploadImage, "/items/imageUpload", drogon::Post, "JwtAuthFilter");
+    ADD_METHOD_TO(ItemsController::downloadImage, "/images/{1}", drogon::Get);
     METHOD_LIST_END
 
     void getItemsBySearchStr(const drogon::HttpRequestPtr &req,
@@ -29,4 +30,6 @@ public:
                std::function<void(const drogon::HttpResponsePtr &)> &&callback);
     void uploadImage(const drogon::HttpRequestPtr &req,
                std::function<void(const drogon::HttpResponsePtr &)> &&callback);
+    void downloadImage(const drogon::HttpRequestPtr &req,
+               std::function<void(const drogon::HttpResponsePtr &)> &&callback,  std::string filename );
 };

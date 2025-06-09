@@ -50,6 +50,7 @@ class Items
         static const std::string _category;
         static const std::string _price;
         static const std::string _imageURL;
+        static const std::string _ownerUsername;
     };
 
     static const int primaryKeyNumber;
@@ -156,8 +157,18 @@ class Items
     void setImageurl(std::string &&pImageurl) noexcept;
     void setImageurlToNull() noexcept;
 
+    /**  For column ownerUsername  */
+    ///Get the value of the column ownerUsername, returns the default value if the column is null
+    const std::string &getValueOfOwnerusername() const noexcept;
+    ///Return a shared_ptr object pointing to the column const value, or an empty shared_ptr object if the column is null
+    const std::shared_ptr<std::string> &getOwnerusername() const noexcept;
+    ///Set the value of the column ownerUsername
+    void setOwnerusername(const std::string &pOwnerusername) noexcept;
+    void setOwnerusername(std::string &&pOwnerusername) noexcept;
+    void setOwnerusernameToNull() noexcept;
 
-    static size_t getColumnNumber() noexcept {  return 6;  }
+
+    static size_t getColumnNumber() noexcept {  return 7;  }
     static const std::string &getColumnName(size_t index) noexcept(false);
 
     Json::Value toJson() const;
@@ -184,6 +195,7 @@ class Items
     std::shared_ptr<std::string> category_;
     std::shared_ptr<double> price_;
     std::shared_ptr<std::string> imageurl_;
+    std::shared_ptr<std::string> ownerusername_;
     struct MetaData
     {
         const std::string colName_;
@@ -195,7 +207,7 @@ class Items
         const bool notNull_;
     };
     static const std::vector<MetaData> metaData_;
-    bool dirtyFlag_[6]={ false };
+    bool dirtyFlag_[7]={ false };
   public:
     static const std::string &sqlForFindingByPrimaryKey()
     {
@@ -238,6 +250,11 @@ class Items
             sql += "imageURL,";
             ++parametersCount;
         }
+        if(dirtyFlag_[6])
+        {
+            sql += "ownerUsername,";
+            ++parametersCount;
+        }
         if(parametersCount > 0)
         {
             sql[sql.length()-1]=')';
@@ -267,6 +284,11 @@ class Items
 
         }
         if(dirtyFlag_[5])
+        {
+            sql.append("?,");
+
+        }
+        if(dirtyFlag_[6])
         {
             sql.append("?,");
 

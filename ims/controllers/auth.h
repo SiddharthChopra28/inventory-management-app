@@ -9,8 +9,8 @@
 class AuthController : public drogon::HttpController<AuthController> {
 public:
     METHOD_LIST_BEGIN
-    METHOD_ADD(AuthController::login, "/auth/login", drogon::Post);
-    METHOD_ADD(AuthController::registerUser, "/auth/register", drogon::Post);
+    ADD_METHOD_TO(AuthController::login, "/auth/login", drogon::Post);
+    ADD_METHOD_TO(AuthController::registerUser, "/auth/register", drogon::Post);
     METHOD_LIST_END
 
     void login(const drogon::HttpRequestPtr &req,

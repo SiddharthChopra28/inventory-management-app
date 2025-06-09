@@ -106,17 +106,14 @@
 
     },
 
-    "static": {
-        "root": "./uploads",
-        "allow_all": true,
-        "alias": "/images"
-    },
+
+
 
     "db_clients": [
         {
-            "name": "users",
+            "name": "default",
             "rdbms": "sqlite3",
-            "filename": "data.db",
+            "filename": "/home/siddharth/Documents/programs/android_apps/inventory_management_system/ims/data.db",
             "is_fast": true
         }
     ],

@@ -25,6 +25,7 @@ void AuthController::login(const drogon::HttpRequestPtr& req,
 
     bool isCorrect = BCrypt::validatePassword(password, user.getValueOfPassword());
 
+
     if (!isCorrect) { // need to add a real check here
         auto resp = drogon::HttpResponse::newHttpResponse();
         resp->setStatusCode(drogon::k401Unauthorized);
@@ -64,6 +65,8 @@ void AuthController::registerUser(const drogon::HttpRequestPtr& req,
     std::string password = (*json)["password"].asString();
 
     auto dbClient = drogon::app().getDbClient();
+    // std::cout<<dbClient->connectionInfo();
+
     drogon::orm::Mapper<drogon_model::sqlite3::Users> userMapper(dbClient);
 
 
