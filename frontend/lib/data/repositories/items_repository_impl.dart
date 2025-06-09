@@ -2,6 +2,9 @@ import '../../domain/items_repository.dart';
 import '../models/item.dart';
 import 'package:dio/dio.dart';
 import 'dart:io';
+import 'dart:convert';
+
+
 
 class ItemsRepositoryImpl implements ItemsRepository {
   final String _baseUrl = 'https://jsonplaceholder.typicode.com';
@@ -17,11 +20,26 @@ class ItemsRepositoryImpl implements ItemsRepository {
       );
       print('Response data: ${response.data}');
 
+      final data = response.data;
+      List<Item> res = [];
+      for (var x in data){
+        res.add(Item(
+          id: x["id"],
+          name: x["name"],
+          quantity: x["quantity"],
+          category: x["category"],
+          price: x["price"],
+          imageURL: x["imageURL"]
+        ));
+      }
+      return res;
     }
     catch(e){
       print(e);
+      return [];
     }
-    // return a list of items from here
+    
+
   }
 
   @override
