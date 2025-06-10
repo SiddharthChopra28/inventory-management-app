@@ -5,26 +5,27 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class AuthRepositoryImpl implements AuthRepository {
   final dio = Dio();
   static const FlutterSecureStorage _storage = FlutterSecureStorage();
+  final String _baseUrl = 'http://10.0.2.2:5556';
 
   @override
   Future<bool> login(String username, String password) async {
     try {
       final response = await dio.post(
-        '/auth/login',
+        '$_baseUrl/auth/login',
         data: {'username': username, 'password': password},
       );
-      if (response.statusCode == 200) {
-        var retjson = response.data;
-        await _storage.write(key: 'accessToken', value: retjson['accessToken']);
-        return true;
-      }
-      else{
-        return false;
-      }
+      var retjson = response.data;
+      await _storage.write(key: 'accessToken', value: retjson['accessToken']);
+      print("written to storage");
+      var token = await FlutterSecureStorage().read(key: 'accessToken');
+       
+      return true;
+
 
       }
       catch (e) {
       print(e);
+      print("error hereeeee");
       return false;
     }
   }
@@ -33,11 +34,10 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<bool> register(String username, String password) async{
     try {
       final response = await dio.post(
-        '/auth/register',
+        '$_baseUrl/auth/register',
         data: {'username': username, 'password': password},
       );
       if (response.statusCode == 200) {
-        // var retjson = response.data;
         return true;
       }
       else{
@@ -46,7 +46,6 @@ class AuthRepositoryImpl implements AuthRepository {
 
     }
     catch (e) {
-      print(e);
       return false;
     }
   }

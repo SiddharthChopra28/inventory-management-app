@@ -16,13 +16,25 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Register'),
-      ),
+      appBar: AppBar(title: Text('Register')),
       body: BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
+        listener: (context, state) async{
           if (state is AuthAuthenticated) {
             Navigator.pushReplacementNamed(context, '/items_view');
+          }
+          if (state is RegisterFail) {
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text("Registration failed")));
+          }
+          if (state is RegisterSuccess){
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Registration successful")),
+            );
+            await Future.delayed(Duration(seconds: 1));
+
+            Navigator.pushReplacementNamed(context, '/login');
+
           }
         },
         child: Padding(

@@ -50,6 +50,8 @@ class MyApp extends StatelessWidget {
           '/items_view': (context) =>
               MyHomePage(title: 'Inventory Management System'),
           '/addedit': (context) => AddEditPage(),
+          '/register': (context) => RegisterPage(),
+          '/login': (context) => LoginPage(),
         },
       ),
     );

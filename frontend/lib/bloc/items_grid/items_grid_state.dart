@@ -11,7 +11,7 @@ class ItemsGridLoadingState extends ItemsGridState {
 
 class ItemsGridLoadedState extends ItemsGridState {
   final List<Item> items;
-  final List<String> categories;
+  final List<dynamic> categories;
   const ItemsGridLoadedState({this.items = const [], this.categories = const []});
   @override
   List<Object> get props => [items];

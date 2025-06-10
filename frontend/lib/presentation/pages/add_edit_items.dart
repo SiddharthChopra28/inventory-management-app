@@ -55,6 +55,7 @@ class AddEditPageState extends State<AddEditPage> {
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: Text(id == null ? "Add Item" : "Edit Item"),
+
         ),
         body: BlocBuilder<ItemsAddEditBloc, ItemsAddEditState>(
           builder: (context, state) {
@@ -153,14 +154,13 @@ class AddEditPageState extends State<AddEditPage> {
             } else if (state is ItemsAddEditLoadedState && id != null) {
               // we can read item from the state
               Item? item = state.item;
-              setState(() {
-                id = item?.id;
-                details = item?.getDetails();
+              details = item?.getDetails();
+
                 _nameController.text = details['name'];
-                _priceController.text = details['price'] as String;
-                _quantityController.text = details['quantity'] as String;
+                _priceController.text = details['price'].toString();
+                _quantityController.text = details['quantity'].toString();
                 _categoryController.text = details['category'];
-              });
+
               if (details['imageURL'] != "") {
                 var imgContainer = Container(
                   width: 240,
@@ -242,10 +242,9 @@ class AddEditPageState extends State<AddEditPage> {
               );
             }
 
-            Navigator.pushNamedAndRemoveUntil(
+            Navigator.pushReplacementNamed(
               context,
               '/items_view', // Your home route
-              (Route<dynamic> route) => false, // Removes all previous routes
             );
           },
           tooltip: 'Increment',

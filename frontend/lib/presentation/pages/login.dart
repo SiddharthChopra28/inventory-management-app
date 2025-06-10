@@ -31,6 +31,13 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                SizedBox(height: 40),
+                Text(
+                  'Login',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                SizedBox(height: 32),
+
                 TextFormField(
                   controller: _usernameController,
                   decoration: InputDecoration(

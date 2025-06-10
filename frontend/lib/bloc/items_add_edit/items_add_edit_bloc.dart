@@ -41,10 +41,23 @@ class ItemsAddEditBloc extends Bloc<ItemsAddEditEvent, ItemsAddEditState> {
     details?["imageURL"] = imgUrl;
 
     if (details?["id"] == null){
-      await itemRepo.addItem(); // make and add item here
+      await itemRepo.addItem(item: Item(
+        name: details?["name"],
+        quantity: int.parse(details?["quantity"]),
+        category: details?["category"],
+        price: double.parse(details?["price"]),
+        imageURL: details?["imageURL"]
+      ));
     }
     else{
-      await itemRepo.updateItem(); // make and add item here
+      await itemRepo.updateItem(item: Item(
+          id: details?["id"],
+          name: details?["name"],
+          quantity: details?["quantity"],
+          category: details?["category"],
+          price: details?["price"],
+          imageURL: details?["imageURL"]
+      ));
     }
 
   }

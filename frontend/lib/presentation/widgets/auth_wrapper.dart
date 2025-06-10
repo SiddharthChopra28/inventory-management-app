@@ -15,6 +15,7 @@ class AuthWrapper extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is AuthLoading) {
+          context.read<AuthBloc>().add(CheckAuthStatus());
           return Scaffold(
             body: Center(
               child: CircularProgressIndicator(),
